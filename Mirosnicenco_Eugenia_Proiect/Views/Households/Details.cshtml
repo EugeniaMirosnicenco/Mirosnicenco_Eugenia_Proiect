@@ -1,0 +1,75 @@
+﻿@model Mirosnicenco_Eugenia_Proiect.Models.Household
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Household</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HouseholdId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HouseholdId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HouseholdSize)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HouseholdSize)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IncomeLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IncomeLevel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.UrbanRural)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.UrbanRural)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+<h5>Energy Usages</h5>
+@if (Model.EnergyUsages != null && Model.EnergyUsages.Any())
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Avg Monthly Consumption (kWh)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usage in Model.EnergyUsages)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => usage.Year)</td>
+                    <td>@Html.DisplayFor(modelItem => usage.AvgMonthlyConsumption)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No energy usage data available.</p>
+}
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.HouseholdId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

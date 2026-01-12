@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Mirosnicenco_Eugenia_Proiect.Models.RenewableSystem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <p>
+        Find by System Type:
+        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" class="btn btn-default" /> |
+        <a asp-action="Index">Back to Full List</a>
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["HouseholdSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Household</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ProviderSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Provider</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SystemTypeSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">System Type</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CapacitySortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Capacity (kW)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Installation Year</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Household.HouseholdId)
+            </td>
+            <td>
+                @item.EnergyProvider?.ProviderName
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.SystemType)
+             </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.CapacityKW)
+                </td>
+              <td>
+                 @Html.DisplayFor(modelItem => item.InstalationYear)
+              </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RenewableSystemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RenewableSystemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RenewableSystemId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

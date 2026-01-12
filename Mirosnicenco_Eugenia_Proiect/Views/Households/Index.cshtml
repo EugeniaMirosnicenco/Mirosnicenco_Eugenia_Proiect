@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Mirosnicenco_Eugenia_Proiect.Models.Household>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Country:
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" 
+                asp-route-sortOrder="@ViewData["HouseholdSizeSortParm"]"
+                asp-route-searchString="@ViewData["CurrentFilter"]">Household Size</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["IncomeLevelSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Income Level</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["UrbanRuralSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Urban/Rural</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CountrySortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Country</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseholdSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IncomeLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UrbanRural)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.HouseholdId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.HouseholdId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.HouseholdId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

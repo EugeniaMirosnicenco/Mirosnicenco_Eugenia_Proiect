@@ -1,0 +1,54 @@
+﻿@model Mirosnicenco_Eugenia_Proiect.Models.RenewableSystem
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>RenewableSystem</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RenewableSystemId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RenewableSystemId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SystemType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SystemType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CapacityKW)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CapacityKW)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.InstalationYear)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.InstalationYear)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Household)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Household.HouseholdId)
+        </dd>
+        <dt class="col-sm-2">
+            Provider
+        </dt>
+        <dd class="col-sm-10">
+            @Model.EnergyProvider?.ProviderName
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.RenewableSystemId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

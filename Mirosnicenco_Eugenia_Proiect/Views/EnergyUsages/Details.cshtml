@@ -1,0 +1,42 @@
+﻿@model Mirosnicenco_Eugenia_Proiect.Models.EnergyUsage
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EnergyUsage</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EnergyUsageId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EnergyUsageId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AvgMonthlyConsumption)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AvgMonthlyConsumption)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Household)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Household.HouseholdId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.EnergyUsageId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

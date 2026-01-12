@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Mirosnicenco_Eugenia_Proiect.Models.EnergyUsage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Year:
+            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Year</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ConsumptionSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Avg Monthly Consumption</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["HouseholdSortParm"]"
+                   asp-route-searchString="@ViewData["CurrentFilter"]">Household</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvgMonthlyConsumption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Household.HouseholdId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EnergyUsageId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EnergyUsageId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EnergyUsageId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

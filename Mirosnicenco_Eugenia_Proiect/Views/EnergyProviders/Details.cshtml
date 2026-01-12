@@ -1,0 +1,76 @@
+﻿@model Mirosnicenco_Eugenia_Proiect.Models.EnergyProvider
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EnergyProvider</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EnergyProviderId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EnergyProviderId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProviderName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProviderName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProviderType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProviderType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GreenEnergyShare)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GreenEnergyShare)
+        </dd>
+    </dl>
+</div>
+<div>
+    <h4>Renewable Systems</h4>
+
+    @if (Model.RenewableSystems != null && Model.RenewableSystems.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>System ID</th>
+                    <th>System Type</th>
+                    <th>Capacity (kW)</th>
+                    <th>Installation Year</th>
+                    <th>Household ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var system in Model.RenewableSystems)
+                {
+                    <tr>
+                        <td>@system.RenewableSystemId</td>
+                        <td>@system.SystemType</td>
+                        <td>@system.CapacityKW</td>
+                        <td>@system.InstalationYear</td>
+                        <td>@system.Household?.HouseholdId</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No renewable systems available for this provider.</p>
+    }
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.EnergyProviderId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
