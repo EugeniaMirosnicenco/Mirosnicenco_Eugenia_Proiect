@@ -1,0 +1,407 @@
+﻿{
+  "Scenario": "Regression",
+  "DataSource": {
+    "Version": 3,
+    "EscapeCharacter": "\"",
+    "ReadMultiLines": false,
+    "KeepDiacritics": false,
+    "KeepPunctuations": false,
+    "AllowQuoting": false,
+    "Type": "TabularFile",
+    "FilePath": "C:\\Users\\Lenovo\\Desktop\\Proiect Big Data\\Renewable_Energy_Usage_Sampled.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Household_ID",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Region",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Country",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Energy_Source",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Monthly_Usage_kWh",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Year",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Household_Size",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Income_Level",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Urban_Rural",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Adoption_Year",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Subsidy_Received",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 5
+      },
+      {
+        "ColumnName": "Cost_Savings_USD",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 5
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.0017574092632792748,
+        "RuntimeInSeconds": 1.705,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ],
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ],
+            "InputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "Country",
+            "OutputColumnName": "Country"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural",
+              "Household_Size",
+              "Adoption_Year",
+              "Country"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfTrees": 5,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 0.9951491,
+            "LabelColumnName": "Monthly_Usage_kWh",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.0017574092632792748,
+        "RuntimeInSeconds": 1.688,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ],
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ],
+            "InputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "Country",
+            "OutputColumnName": "Country"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural",
+              "Household_Size",
+              "Adoption_Year",
+              "Country"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfTrees": 5,
+            "NumberOfLeaves": 9,
+            "FeatureFraction": 0.9961149,
+            "LabelColumnName": "Monthly_Usage_kWh",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": -0.0013895075889927221,
+        "RuntimeInSeconds": 1.676,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ],
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ],
+            "InputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "Country",
+            "OutputColumnName": "Country"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural",
+              "Household_Size",
+              "Adoption_Year",
+              "Country"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfTrees": 5,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Monthly_Usage_kWh",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": -0.0013895075889927221,
+        "RuntimeInSeconds": 1.693,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ],
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ],
+            "InputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "Country",
+            "OutputColumnName": "Country"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural",
+              "Household_Size",
+              "Adoption_Year",
+              "Country"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfTrees": 5,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Monthly_Usage_kWh",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": -0.0024495234552531107,
+        "RuntimeInSeconds": 1.754,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3 * e5",
+          "e0": {
+            "OutputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ],
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ],
+            "InputColumnNames": [
+              "Household_Size",
+              "Adoption_Year"
+            ]
+          },
+          "e2": {
+            "InputColumnName": "Country",
+            "OutputColumnName": "Country"
+          },
+          "e3": {
+            "InputColumnNames": [
+              "Income_Level",
+              "Urban_Rural",
+              "Household_Size",
+              "Adoption_Year",
+              "Country"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e5": {
+            "NumberOfTrees": 9,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Monthly_Usage_kWh",
+            "FeatureColumnName": "Features"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "OneHotEncoding",
+      "e1": "ReplaceMissingValues",
+      "e2": "FeaturizeText",
+      "e3": "Concatenate",
+      "e4": "FastTreeRegression",
+      "e5": "FastForestRegression",
+      "e6": "LightGbmRegression",
+      "e7": "LbfgsPoissonRegressionRegression",
+      "e8": "SdcaRegression"
+    },
+    "Schema": "e0 * e1 * e2 * e3 * (e4 + e5 + e6 + e7 + e8)",
+    "MetricName": "RSquared",
+    "ModelFilePath": "C:\\Users\\Lenovo\\Desktop\\Proiect Big Data\\Mirosnicenco_Eugenia_Proiect\\Mirosnicenco_Eugenia_Proiect\\AvgMontlyConsumptionPredictionModel.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 5,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "RegressionTrainingOption",
+    "TrainingTime": 120,
+    "LabelColumn": "Monthly_Usage_kWh",
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}

@@ -1,12 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Mirosnicenco_Eugenia_Proiect.Data;
+using Mirosnicenco_Eugenia_Proiect.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<LibraryContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryContext") ?? throw new InvalidOperationException("Connection string 'LibraryContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IConsumptionPredictionService, ConsumptionPredictionService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:63054");
+});
 
 var app = builder.Build();
 
