@@ -1,0 +1,120 @@
+﻿@model DashboardViewModel
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = "Predictions Dashboard";
+}
+
+<h1>Predictions Dashboard</h1>
+
+<!-- Filter form -->
+<form method="get" asp-action="Dashboard" class="row g-3 align-items-end mb-4">
+    <div class="col-md-3">
+        <label for="fromDate" class="form-label">From Date</label>
+        <input type="date" name="fromDate" id="fromDate" class="form-control"
+               value="@(Model.FromDate?.ToString("yyyy-MM-dd") ?? "")" />
+    </div>
+    <div class="col-md-3">
+        <label for="toDate" class="form-label">To Date</label>
+        <input type="date" name="toDate" id="toDate" class="form-control"
+               value="@(Model.ToDate?.ToString("yyyy-MM-dd") ?? "")" />
+    </div>
+    <div class="col-md-2 align-self-end">
+        <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
+    </div>
+</form>
+
+<!-- Cards row -->
+<div class="row mb-4">
+    <!-- Card: Total predictions -->
+    <div class="col-md-4">
+        <div class="card text-bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Predictions</h5>
+                <p class="card-text display-6">@Model.TotalPredictions</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card: Income level stats -->
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Income Level - Average Consumption</h5>
+                <table class="table table-sm mb-0">
+                    <thead>
+                        <tr>
+                            <th>Income Level</th>
+                            <th>Number of Predictions</th>
+                            <th>Average Consumption (kWh)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.IncomeLevelStats)
+                        {
+                            <tr>
+                                <td>@item.IncomeLevel</td>
+                                <td>@item.Count</td>
+                                <td>@item.AverageConsumption.ToString("0.00")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Section: Consumption distribution chart -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Monthly Consumption Distribution (kWh)</h5>
+                <canvas id="consumptionChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = @Html.Raw(JsonSerializer.Serialize(Model.ConsumptionBuckets.Select(b => b.Label)));
+        const dataValues = @Html.Raw(JsonSerializer.Serialize(Model.ConsumptionBuckets.Select(b => b.Count)));
+
+        const ctx = document.getElementById('consumptionChart').getContext('2d');
+
+        const consumptionChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Number of Predictions',
+                    data: dataValues,
+                    borderWidth: 1,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Predictions'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Consumption Interval (kWh)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+}

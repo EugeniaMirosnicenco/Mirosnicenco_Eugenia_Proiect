@@ -1,25 +1,31 @@
 ﻿@model IEnumerable<Mirosnicenco_Eugenia_Proiect.Models.EnergyProvider>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Energy Providers";
 }
 
-<h1>Index</h1>
+<h1>Energy Providers</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary btn-sm">Create New</a>
 </p>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by Provider Name:
-            <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
-        </p>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="row g-3 align-items-end">
+        <div class="col-auto">
+            <label for="searchString" class="form-label">Find by Provider Name:</label>
+            <input type="text" name="searchString" id="searchString" value="@ViewData["CurrentFilter"]" class="form-control" />
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Back to Full List</a>
+        </div>
     </div>
 </form>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -38,23 +44,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProviderName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProviderType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GreenEnergyShare)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EnergyProviderId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EnergyProviderId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EnergyProviderId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProviderName</td>
+                <td>@item.ProviderType</td>
+                <td>@item.GreenEnergyShare</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EnergyProviderId" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.EnergyProviderId" class="btn btn-outline-secondary btn-sm">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.EnergyProviderId" class="btn btn-outline-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

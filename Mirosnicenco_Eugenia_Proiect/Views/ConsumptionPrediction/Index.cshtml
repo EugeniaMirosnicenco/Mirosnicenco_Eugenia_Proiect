@@ -9,18 +9,20 @@
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Index" method="post">
-            <div class="form-group">
-                <label>Country</label>
+            <div class="mb-3">
+                <label asp-for="country" class="form-label">Country</label>
                 <input asp-for="country" class="form-control" />
                 <span asp-validation-for="country" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label>Household Size</label>
+
+            <div class="mb-3">
+                <label asp-for="household_Size" class="form-label">Household Size</label>
                 <input asp-for="household_Size" class="form-control" type="number" min="1" />
                 <span asp-validation-for="household_Size" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label>Income Level</label>
+
+            <div class="mb-3">
+                <label asp-for="income_Level" class="form-label">Income Level</label>
                 <select asp-for="income_Level" class="form-control">
                     <option value="">--Select Income Level--</option>
                     <option value="Low">Low</option>
@@ -29,8 +31,9 @@
                 </select>
                 <span asp-validation-for="income_Level" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label>Urban / Rural</label>
+
+            <div class="mb-3">
+                <label asp-for="urban_Rural" class="form-label">Urban / Rural</label>
                 <select asp-for="urban_Rural" class="form-control">
                     <option value="">--Select Urban/Rural--</option>
                     <option value="Urban">Urban</option>
@@ -39,20 +42,20 @@
                 <span asp-validation-for="urban_Rural" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label>Adoption Year</label>
+            <div class="mb-3">
+                <label asp-for="adoption_Year" class="form-label">Adoption Year</label>
                 <input asp-for="adoption_Year" class="form-control" type="number" min="1900" max="2100" />
                 <span asp-validation-for="adoption_Year" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-2">Predict</button>
+            <button type="submit" class="btn btn-primary btn-sm">Predict</button>
         </form>
     </div>
 
     <div class="col-md-6">
         @if (Model.monthly_Usage_kWh > 0)
         {
-            <div class="card mt-4">
+            <div class="card mt-3">
                 <div class="card-header">
                     Prediction Result
                 </div>

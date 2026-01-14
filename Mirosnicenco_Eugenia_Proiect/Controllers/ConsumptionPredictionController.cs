@@ -76,5 +76,66 @@ namespace Mirosnicenco_Eugenia_Proiect.Controllers
             return View(history);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Dashboard(DateTime? fromDate, DateTime? toDate)
+        {
+            var query = _context.PredictionHistory.AsQueryable();
+
+            if (fromDate.HasValue)
+                query = query.Where(p => p.CreatedAt.Date >= fromDate.Value.Date);
+
+            if (toDate.HasValue)
+                query = query.Where(p => p.CreatedAt.Date <= toDate.Value.Date);
+
+            var totalPredictions = await query.CountAsync();
+
+            var incomeStats = await query
+                .GroupBy(p => p.Income_Level)
+                .Select(g => new IncomeLevelStat
+                {
+                    IncomeLevel = g.Key,
+                    Count = g.Count(),
+                    AverageConsumption = g.Average(x => x.Monthly_Usage_kWh)
+                })
+                .ToListAsync();
+
+            var allConsumptions = await query
+                .Select(p => p.Monthly_Usage_kWh)
+                .ToListAsync();
+
+            var buckets = new List<ConsumptionBucketStat>
+            {
+                new ConsumptionBucketStat { Label = "0 - 150 kWh" },
+                new ConsumptionBucketStat { Label = "150 - 300 kWh" },
+                new ConsumptionBucketStat { Label = "300 - 450 kWh" },
+                new ConsumptionBucketStat { Label = "450 - 600 kWh" },
+                new ConsumptionBucketStat { Label = "> 600 kWh" }
+            };
+
+            foreach (var usage in allConsumptions)
+            {
+                if (usage < 150)
+                    buckets[0].Count++;
+                else if (usage < 300)
+                    buckets[1].Count++;
+                else if (usage < 450)
+                    buckets[2].Count++;
+                else if (usage < 600)
+                    buckets[3].Count++;
+                else
+                    buckets[4].Count++;
+            }
+
+            var vm = new DashboardViewModel
+            {
+                TotalPredictions = totalPredictions,
+                IncomeLevelStats = incomeStats,
+                ConsumptionBuckets = buckets,
+                FromDate = fromDate,
+                ToDate = toDate
+            };
+
+            return View(vm);
+        }
     }
 }

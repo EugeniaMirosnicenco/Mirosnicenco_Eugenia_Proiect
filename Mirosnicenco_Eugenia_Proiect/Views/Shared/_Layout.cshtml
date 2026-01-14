@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Mirosnicenco_Eugenia_Proiect.styles.css" asp-append-version="true" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        main {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        footer {
+            background-color: #ffffff; 
+            padding: 15px 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,9 +35,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Households" asp-action="Index">Households</a>
                         </li>
@@ -42,34 +55,37 @@
                                 Predict Energy Usage
                             </a>
                         </li>
-                        <!--
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ConsumptionPrediction" asp-action="History">
-                                Prediction History
-                            </a>
-                        </li>
-                        -->
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="PredictionHistoryGrpc" asp-action="Index">
                                 Prediction History (gRPC)
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ConsumptionPrediction" asp-action="Dashboard">
+                                Prediction Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted text-center">
         <div class="container">
             &copy; 2026 - Exploring Renewable Energy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
