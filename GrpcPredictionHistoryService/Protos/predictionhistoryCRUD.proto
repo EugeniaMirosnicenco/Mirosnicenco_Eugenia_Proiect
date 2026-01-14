@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcPredictionHistoryService";
+package prediction;
+
+service PredictionHistoryService {
+    rpc GetAll (Empty) returns (PredictionHistoryList) {}
+    rpc Get (PredictionHistoryId) returns (PredictionHistory) {}
+    rpc Delete (PredictionHistoryId) returns (Empty) {}
+}
+
+message Empty {}
+
+message PredictionHistory {
+    int32 id = 1;
+    string country = 2;
+    int32 household_Size = 3;
+    string income_Level = 4;
+    string urban_Rural = 5;
+    int32 adoption_Year = 6;
+    double monthly_Usage_kWh = 7;
+    string createdAt = 8;
+}
+
+message PredictionHistoryList {
+    repeated PredictionHistory item = 1;
+}
+
+message PredictionHistoryId {
+    int32 id = 1;
+}

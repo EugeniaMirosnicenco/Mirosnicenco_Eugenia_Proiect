@@ -19,5 +19,7 @@ namespace Mirosnicenco_Eugenia_Proiect.Data
         public DbSet<Mirosnicenco_Eugenia_Proiect.Models.RenewableSystem> RenewableSystem { get; set; } = default!;
         public DbSet<Mirosnicenco_Eugenia_Proiect.Models.EnergyUsage> EnergyUsage { get; set; } = default!;
         public DbSet<Mirosnicenco_Eugenia_Proiect.Models.Country> Country { get; set; } = default!;
+
+        public DbSet<Mirosnicenco_Eugenia_Proiect.Models.PredictionHistory> PredictionHistory { get; set; } = default!;
     }
 }

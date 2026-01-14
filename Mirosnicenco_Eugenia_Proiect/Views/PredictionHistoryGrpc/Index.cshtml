@@ -1,0 +1,39 @@
+﻿@model GrpcPredictionHistoryService.PredictionHistoryList
+
+@{
+    ViewData["Title"] = "Prediction History (gRPC)";
+}
+
+<h1>Prediction History (gRPC)</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Country</th>
+            <th>Household Size</th>
+            <th>Income Level</th>
+            <th>Urban / Rural</th>
+            <th>Adoption Year</th>
+            <th>Monthly Usage (kWh)</th>
+            <th>Created At</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Item)
+        {
+            <tr>
+                <td>@item.Country</td>
+                <td>@item.HouseholdSize</td>
+                <td>@item.IncomeLevel</td>
+                <td>@item.UrbanRural</td>
+                <td>@item.AdoptionYear</td>
+                <td>@item.MonthlyUsageKWh</td>
+                <td>@item.CreatedAt</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
